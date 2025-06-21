@@ -1,8 +1,10 @@
 import { ReactNode, useState } from 'react';
 import { Sheet, SheetContent } from '@workspace/ui/components/sheet';
-import { SidebarContent, MobileHeader, AdminFooter } from './AdminLayout/index';
 import type { SidebarItem } from '@/lib/admin-menus';
 import { cn } from '@workspace/ui/lib/utils';
+import { SidebarContent } from './SidebarContent';
+import { MobileHeader } from './MobileHeader';
+import { AdminFooter } from './AdminFooter';
 
 interface AdminLayoutProps {
   children: ReactNode;
