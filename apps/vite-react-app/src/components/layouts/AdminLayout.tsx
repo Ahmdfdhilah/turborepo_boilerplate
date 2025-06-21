@@ -1,13 +1,9 @@
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@workspace/ui/components/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
 import { ScrollArea, ScrollBar } from '@workspace/ui/components/scroll-area';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@workspace/ui/components/dropdown-menu';
 import { Sheet, SheetContent } from '@workspace/ui/components/sheet';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { SidebarHeader, SidebarFooter, MobileHeader, AdminFooter } from './AdminLayout/index';
 import {
-  Menu,
   Home,
   Users,
   Settings,
@@ -15,14 +11,7 @@ import {
   FileText,
   Package,
   ShoppingCart,
-  Bell,
   ChevronDown,
-  LogOut,
-  User,
-  CreditCard,
-  HelpCircle,
-  ChevronLeft,
-  ChevronRight,
   UserPlus,
   UserCheck,
   UserX,
@@ -271,43 +260,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
   const SidebarContent = ({ collapsed = false }: { collapsed?: boolean }) => (
     <div className="flex h-full flex-col">
-      {/* Fixed Header - Logo and Collapse Toggle */}
-      <div className={cn("flex h-16 items-center flex-shrink-0 border-b border-sidebar-border", collapsed ? "px-3 justify-center" : "px-6 justify-between")}>
-        <Link to="/admin" className={cn("flex items-center", collapsed ? "justify-center" : "space-x-2")}>
-          <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-sidebar-primary-foreground font-bold text-sm">A</span>
-          </div>
-          {!collapsed && <span className="text-xl font-bold text-sidebar-foreground">Admin Panel</span>}
-        </Link>
-        {!collapsed && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden md:flex h-8 w-8 p-0 flex-shrink-0"
-            onClick={() => setIsCollapsed(true)}
-            title="Collapse sidebar"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
+      <SidebarHeader 
+        collapsed={collapsed} 
+        onToggleCollapse={() => setIsCollapsed(!collapsed)} 
+      />
 
-      {/* Expand button when collapsed */}
-      {collapsed && (
-        <div className="flex justify-center px-3 py-2 border-b border-sidebar-border flex-shrink-0">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 w-8 p-0"
-            onClick={() => setIsCollapsed(false)}
-            title="Expand sidebar"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
-
-      {/* Main Navigation Area - Optimized height calculation */}
       <div className="flex-1 overflow-hidden">
         <ScrollArea className={cn("h-full", !collapsed && "h-[75vh] w-[260px]")}>
           <div className={cn("p-4 pb-2", collapsed && "px-2")}>
@@ -321,82 +278,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         </ScrollArea>
       </div>
 
-      {/* Fixed Footer - Positioned higher with better spacing */}
-      <div className={cn("border-t border-sidebar-border p-4 pt-3 flex-shrink-0 mt-auto", collapsed ? "space-y-3" : "space-y-3")}>
-        {/* Theme Toggle and Notifications */}
-        <div className={cn("flex", collapsed ? "flex-col items-center space-y-2" : "items-center justify-between")}>
-          {/* Theme Toggle */}
-          <div className={cn("flex", collapsed ? "justify-center" : "justify-start")}>
-            <ThemeToggle />
-          </div>
-
-          {/* Notifications */}
-          <div className={cn("flex", collapsed ? "justify-center" : "justify-end")}>
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-primary text-xs text-destructive-foreground flex items-center justify-center">
-                3
-              </span>
-            </Button>
-          </div>
-        </div>
-
-        {/* Profile dropdown */}
-        <div className={cn("flex", collapsed ? "justify-center" : "justify-start")}>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className={cn("p-2 hover:bg-transparent", collapsed ? "flex items-center justify-center" : "flex items-center space-x-2 w-full")}>
-                <Avatar className="h-6 w-6 flex-shrink-0">
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-                {!collapsed && (
-                  <>
-                    <div className="flex flex-col items-start flex-1 min-w-0">
-                      <span className="text-sm font-medium text-foreground truncate">John Doe</span>
-                      <span className="text-xs text-muted-foreground truncate">Admin</span>
-                    </div>
-                    <ChevronDown className="h-4 w-4 flex-shrink-0" />
-                  </>
-                )}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align={collapsed ? "center" : "end"} className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link to="/admin/profile" className="flex items-center">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/admin/billing" className="flex items-center">
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  <span>Billing</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/admin/settings" className="flex items-center">
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/help" className="flex items-center">
-                  <HelpCircle className="mr-2 h-4 w-4" />
-                  <span>Help</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
+      <SidebarFooter collapsed={collapsed} />
     </div>
   );
 
@@ -424,69 +306,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         "min-h-screen flex flex-col transition-all duration-300",
         isCollapsed ? "md:pl-20" : "md:pl-64" 
       )}>
-        {/* Mobile Header Only */}
-        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b border-border bg-background px-4 shadow-sm md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsSidebarOpen(true)}
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
-
-          <div className="flex items-center gap-x-2">
-            <ThemeToggle />
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-primary text-xs text-destructive-foreground flex items-center justify-center">
-                3
-              </span>
-            </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center space-x-2 p-2 hover:bg-transparent">
-                  <Avatar className="h-6 w-6">
-                    <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/admin/profile" className="flex items-center">
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/admin/billing" className="flex items-center">
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    <span>Billing</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/admin/settings" className="flex items-center">
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/help" className="flex items-center">
-                    <HelpCircle className="mr-2 h-4 w-4" />
-                    <span>Help</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-destructive">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </header>
+        <MobileHeader onOpenSidebar={() => setIsSidebarOpen(true)} />
 
         {/* Page Content */}
         <main className="flex-1">
@@ -495,38 +315,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           </div>
         </main>
 
-        {/* Footer */}
-        <footer className="border-t border-border bg-background">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-              <div className="flex items-center space-x-4">
-                <p className="text-sm text-muted-foreground">
-                  © 2024 Admin Panel. All rights reserved.
-                </p>
-              </div>
-              <div className="flex items-center space-x-6">
-                <Link
-                  to="/admin/help"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Help
-                </Link>
-                <Link
-                  to="/admin/privacy"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Privacy
-                </Link>
-                <Link
-                  to="/admin/terms"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Terms
-                </Link>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <AdminFooter />
       </div>
     </div>
   );
