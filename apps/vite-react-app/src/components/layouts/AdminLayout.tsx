@@ -91,7 +91,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               className={cn(
                 'flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                  ? 'bg-sidebar-primary text-sidebar-primary-foreground'
                   : 'text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground'
               )}
               onClick={() => setIsSidebarOpen(false)}
@@ -143,7 +143,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             {/* Notifications */}
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-destructive text-xs text-destructive-foreground flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-xs text-destructive-foreground flex items-center justify-center">
                 3
               </span>
             </Button>
@@ -151,7 +151,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             {/* Profile dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center space-x-2 p-2">
+                  <Button variant="ghost" className="flex items-center space-x-2 p-2 hover:bg-transparent">
                     <Avatar className="h-8 w-8">
                       <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
                       <AvatarFallback>JD</AvatarFallback>
