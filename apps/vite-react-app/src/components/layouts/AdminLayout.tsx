@@ -3,19 +3,17 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@workspace/ui/components/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@workspace/ui/components/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@workspace/ui/components/sheet';
-import { 
-  Menu, 
-  X, 
-  Home, 
-  Users, 
-  Settings, 
-  BarChart3, 
-  FileText, 
-  Package, 
+import { Sheet, SheetContent } from '@workspace/ui/components/sheet';
+import {
+  Menu,
+  Home,
+  Users,
+  Settings,
+  BarChart3,
+  FileText,
+  Package,
   ShoppingCart,
   Bell,
-  Search,
   ChevronDown,
   LogOut,
   User,
@@ -73,7 +71,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const SidebarContent = () => (
     <div className="flex h-full flex-col">
       {/* Logo */}
-      <div className="flex h-16 items-center border-b border-sidebar-border px-6">
+      <div className="flex h-16 items-center px-6">
         <Link to="/admin" className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center">
             <span className="text-sidebar-primary-foreground font-bold text-sm">A</span>
@@ -126,7 +124,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Main Content */}
       <div className="md:pl-64 min-h-screen flex flex-col">
         {/* Top Header */}
-        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b border-border bg-background px-4 shadow-sm sm:px-6 lg:px-8">
           {/* Mobile menu button */}
           <Button
             variant="ghost"
@@ -136,32 +134,21 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           >
             <Menu className="h-6 w-6" />
           </Button>
+          
+          {/* Spacer for desktop (no mobile menu button) */}
+          <div className="hidden md:block"></div>
+          
+          {/* Right side - Notifications and Profile */}
+          <div className="flex items-center gap-x-4">
+            {/* Notifications */}
+            <Button variant="ghost" size="sm" className="relative">
+              <Bell className="h-5 w-5" />
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-destructive text-xs text-destructive-foreground flex items-center justify-center">
+                3
+              </span>
+            </Button>
 
-          {/* Search */}
-          <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <form className="relative flex flex-1" action="#" method="GET">
-              <label htmlFor="search-field" className="sr-only">
-                Search
-              </label>
-              <Search className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-muted-foreground pl-3" />
-              <input
-                id="search-field"
-                className="block h-full w-full border-0 py-0 pl-10 pr-0 text-foreground placeholder:text-muted-foreground focus:ring-0 sm:text-sm bg-transparent"
-                placeholder="Search..."
-                type="search"
-                name="search"
-              />
-            </form>
-            <div className="flex items-center gap-x-4 lg:gap-x-6">
-              {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-destructive text-xs text-destructive-foreground flex items-center justify-center">
-                  3
-                </span>
-              </Button>
-
-              {/* Profile dropdown */}
+            {/* Profile dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center space-x-2 p-2">
@@ -204,13 +191,12 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-red-600">
+                  <DropdownMenuItem className="text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Log out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </div>
           </div>
         </header>
 

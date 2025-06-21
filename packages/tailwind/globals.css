@@ -113,40 +113,40 @@ body {
 @layer base {
   :root {
     --background: hsl(0 0% 100%);
-    --foreground: hsl(220.91 39.29% 10.98%);
+    --foreground: hsl(222.5806 40.2597% 15.0980%);
     --card: hsl(0 0% 100%);
-    --card-foreground: hsl(220.91 39.29% 10.98%);
+    --card-foreground: hsl(222.5806 40.2597% 15.0980%);
     --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(220.91 39.29% 10.98%);
-    --primary: hsl(138.86 56.45% 24.31%);
+    --popover-foreground: hsl(222.5806 40.2597% 15.0980%);
+    --primary: hsl(202.9167 72.0000% 39.2157%);
     --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(80.62 50% 87.45%);
-    --secondary-foreground: hsl(220.91 39.29% 10.98%);
-    --muted: hsl(220 8.94% 46.08%);
-    --muted-foreground: hsl(217.89 10.61% 64.90%);
-    --accent: hsl(78, 59%, 88%);
-    --accent-foreground: hsl(220.91 39.29% 10.98%);
-    --destructive: hsl(0 84.04% 63.14%);
+    --secondary: hsl(214.2857 31.8182% 91.3725%);
+    --secondary-foreground: hsl(222.5806 40.2597% 15.0980%);
+    --muted: hsl(215.0000 20.2247% 65.0980%);
+    --muted-foreground: hsl(215.3846 16.3180% 46.8627%);
+    --accent: hsl(354.4041 75.6863% 50%);
+    --accent-foreground: hsl(0 0% 100%);
+    --destructive: hsl(354.4041 75.6863% 50%);
     --destructive-foreground: hsl(0 0% 100%);
-    --border: hsl(216.00 12.20% 83.92%);
-    --input: hsl(220.00 14.29% 95.88%);
-    --ring: hsl(121.59 44.66% 49.61%);
-    --chart-1: hsl(138.86 56.45% 24.31%);
-    --chart-2: hsl(121.59 44.66% 49.61%);
-    --chart-3: hsl(80.62 50% 87.45%);
-    --chart-4: hsl(216.00 12.20% 83.92%);
-    --chart-5: hsl(220.91 39.29% 10.98%);
+    --border: hsl(214.2857 31.8182% 91.3725%);
+    --input: hsl(214.2857 31.8182% 91.3725%);
+    --ring: hsl(198.4375 93.2039% 59.6078%);
+    --chart-1: hsl(202.9167 72.0000% 39.2157%);
+    --chart-2: hsl(354.4041 75.6863% 50%);
+    --chart-3: hsl(38.9873 95.9514% 48.4314%);
+    --chart-4: hsl(122.4242 39.4422% 49.2157%);
+    --chart-5: hsl(291.2409 63.7209% 42.1569%);
     --sidebar: hsl(0 0% 100%);
-    --sidebar-foreground: hsl(220.91 39.29% 10.98%);
-    --sidebar-primary: hsl(138.86 56.45% 24.31%);
+    --sidebar-foreground: hsl(222.5806 40.2597% 15.0980%);
+    --sidebar-primary: hsl(202.9167 72.0000% 39.2157%);
     --sidebar-primary-foreground: hsl(0 0% 100%);
-    --sidebar-accent: hsl(121.59 44.66% 49.61%);
+    --sidebar-accent: hsl(354.4041 75.6863% 50%);
     --sidebar-accent-foreground: hsl(0 0% 100%);
-    --sidebar-border: hsl(216.00 12.20% 83.92%);
-    --sidebar-ring: hsl(121.59 44.66% 49.61%);
-    --font-sans: Geist, sans-serif;
-    --font-serif: Georgia, serif;
-    --font-mono: Geist Mono, monospace;
+    --sidebar-border: hsl(214.2857 31.8182% 91.3725%);
+    --sidebar-ring: hsl(198.4375 93.2039% 59.6078%);
+    --font-sans: sans-serif;
+    --font-serif: serif;
+    --font-mono: monospace;
     --radius: 0.5rem;
     --shadow-2xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.05);
     --shadow-xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.05);
@@ -158,43 +158,43 @@ body {
     --shadow-2xl: 0px 0px 30px 0px hsl(0 0% 0% / 0.25);
     --tracking-normal: 0.025em;
   }
-
+  
   .dark {
-    --background: hsl(222.22 47.37% 11.18%);
+    --background: hsl(222.2222 47.3684% 11.1765%);
     --foreground: hsl(0 0% 100%);
-    --card: hsl(220.65 40.26% 15.10%);
+    --card: hsl(222.5806 40.2597% 15.0980%);
     --card-foreground: hsl(0 0% 100%);
-    --popover: hsl(220.65 40.26% 15.10%);
+    --popover: hsl(222.5806 40.2597% 15.0980%);
     --popover-foreground: hsl(0 0% 100%);
-    --primary: hsl(138.86 56.45% 24.31%);
+    --primary: hsl(202.9167 72.0000% 39.2157%);
     --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(80.62 50% 87.45%);
-    --secondary-foreground: hsl(222.22 47.37% 11.18%);
-    --muted: hsl(220 8.94% 46.08%);
-    --muted-foreground: hsl(217.89 10.61% 64.90%);
-    --accent: hsl(121.59 44.66% 49.61%);
+    --secondary: hsl(220.5000 34.4828% 22.7451%);
+    --secondary-foreground: hsl(0 0% 100%);
+    --muted: hsl(215.2941 19.3182% 34.5098%);
+    --muted-foreground: hsl(215.0000 20.2247% 65.0980%);
+    --accent: hsl(354.4041 75.6863% 50%);
     --accent-foreground: hsl(0 0% 100%);
-    --destructive: hsl(0 84.04% 63.14%);
+    --destructive: hsl(354.4041 75.6863% 50%);
     --destructive-foreground: hsl(0 0% 100%);
-    --border: hsl(218.33 32.14% 21.96%);
-    --input: hsl(220.65 40.26% 15.10%);
-    --ring: hsl(121.59 44.66% 49.61%);
-    --chart-1: hsl(138.86 56.45% 24.31%);
-    --chart-2: hsl(121.59 44.66% 49.61%);
-    --chart-3: hsl(80.62 50% 87.45%);
-    --chart-4: hsl(218.33 32.14% 21.96%);
-    --chart-5: hsl(0 0% 100%);
-    --sidebar: hsl(222.22 47.37% 11.18%);
+    --border: hsl(220.5000 34.4828% 22.7451%);
+    --input: hsl(222.5806 40.2597% 15.0980%);
+    --ring: hsl(198.4375 93.2039% 59.6078%);
+    --chart-1: hsl(202.9167 72.0000% 39.2157%);
+    --chart-2: hsl(354.4041 75.6863% 50%);
+    --chart-3: hsl(38.9873 95.9514% 48.4314%);
+    --chart-4: hsl(122.4242 39.4422% 49.2157%);
+    --chart-5: hsl(291.2409 63.7209% 42.1569%);
+    --sidebar: hsl(222.2222 47.3684% 11.1765%);
     --sidebar-foreground: hsl(0 0% 100%);
-    --sidebar-primary: hsl(138.86 56.45% 24.31%);
+    --sidebar-primary: hsl(202.9167 72.0000% 39.2157%);
     --sidebar-primary-foreground: hsl(0 0% 100%);
-    --sidebar-accent: hsl(121.59 44.66% 49.61%);
+    --sidebar-accent: hsl(354.4041 75.6863% 50%);
     --sidebar-accent-foreground: hsl(0 0% 100%);
-    --sidebar-border: hsl(218.33 32.14% 21.96%);
-    --sidebar-ring: hsl(121.59 44.66% 49.61%);
-    --font-sans: Geist, sans-serif;
+    --sidebar-border: hsl(220.5000 34.4828% 22.7451%);
+    --sidebar-ring: hsl(198.4375 93.2039% 59.6078%);
+    --font-sans: "Avenir", sans-serif; 
+    --font-mono: "Geist Mono", monospace;
     --font-serif: Georgia, serif;
-    --font-mono: Geist Mono, monospace;
     --radius: 0.5rem;
     --shadow-2xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.10);
     --shadow-xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.10);
@@ -205,7 +205,7 @@ body {
     --shadow-xl: 0px 0px 30px 0px hsl(0 0% 0% / 0.20), 0px 8px 10px -1px hsl(0 0% 0% / 0.20);
     --shadow-2xl: 0px 0px 30px 0px hsl(0 0% 0% / 0.50);
   }
-
+  
   @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -239,16 +239,16 @@ body {
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
-
+  
     --font-sans: var(--font-sans);
     --font-mono: var(--font-mono);
     --font-serif: var(--font-serif);
-
+  
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
-
+  
     --shadow-2xs: var(--shadow-2xs);
     --shadow-xs: var(--shadow-xs);
     --shadow-sm: var(--shadow-sm);
@@ -257,7 +257,7 @@ body {
     --shadow-lg: var(--shadow-lg);
     --shadow-xl: var(--shadow-xl);
     --shadow-2xl: var(--shadow-2xl);
-
+  
     --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
     --tracking-tight: calc(var(--tracking-normal) - 0.025em);
     --tracking-normal: var(--tracking-normal);
@@ -265,7 +265,7 @@ body {
     --tracking-wider: calc(var(--tracking-normal) + 0.05em);
     --tracking-widest: calc(var(--tracking-normal) + 0.1em);
   }
-
+  
   body {
     letter-spacing: var(--tracking-normal);
   }
@@ -273,58 +273,14 @@ body {
 
 /* Font definitions */
 @font-face {
-  font-family: 'Proxima Soft';
-  src: url('/fonts/ProximaSoft-Regular.woff2') format('woff2'),
-    url('/fonts/ProximaSoft-Regular.woff') format('woff');
-  font-weight: normal;
+  font-family: 'Avenir'; /* Use 'Avenir' as the family name */
+  src: url('/fonts/avenir/Avenir-Black.woff2') format('woff2'),
+       url('/fonts/avenir/Avenir-Black.woff') format('woff');
+  font-weight: 900; /* Or 800, depending on the font file's actual weight */
   font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Proxima Soft';
-  src: url('/fonts/ProximaSoft-Bold.woff2') format('woff2'),
-    url('/fonts/ProximaSoft-Bold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Regular.woff2') format('woff2'),
-    url('/fonts/Inter-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Outfit';
-  src: url('/fonts/Outfit-Regular.woff2') format('woff2'),
-    url('/fonts/Outfit-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Plus Jakarta Sans';
-  src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2'),
-    url('/fonts/PlusJakartaSans-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Regular.woff2') format('woff2'),
-    url('/fonts/Satoshi-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
 @layer base {
   * {
