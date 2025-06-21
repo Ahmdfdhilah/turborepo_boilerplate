@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@workspace/ui/components/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
-import { ScrollArea } from '@workspace/ui/components/scroll-area';
+import { ScrollArea, ScrollBar } from '@workspace/ui/components/scroll-area';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@workspace/ui/components/dropdown-menu';
 import { Sheet, SheetContent } from '@workspace/ui/components/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -44,6 +44,7 @@ interface SidebarItem {
   href?: string;
   icon: any;
   children?: SidebarItem[];
+  isPlaceholder?: boolean;
 }
 
 const sidebarItems: SidebarItem[] = [
@@ -54,8 +55,8 @@ const sidebarItems: SidebarItem[] = [
   },
   {
     title: 'Users',
-    href: '/admin/users',
     icon: Users,
+    isPlaceholder: true,
     children: [
       {
         title: 'All Users',
@@ -81,8 +82,8 @@ const sidebarItems: SidebarItem[] = [
   },
   {
     title: 'Products',
-    href: '/admin/products',
     icon: Package,
+    isPlaceholder: true,
     children: [
       {
         title: 'All Products',
@@ -103,8 +104,8 @@ const sidebarItems: SidebarItem[] = [
   },
   {
     title: 'Orders',
-    href: '/admin/orders',
     icon: ShoppingCart,
+    isPlaceholder: true,
     children: [
       {
         title: 'All Orders',
@@ -125,8 +126,8 @@ const sidebarItems: SidebarItem[] = [
   },
   {
     title: 'Analytics',
-    href: '/admin/analytics',
     icon: BarChart3,
+    isPlaceholder: true,
     children: [
       {
         title: 'Overview',
@@ -186,6 +187,15 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     return false;
   };
 
+  const handleMenuClick = (item: SidebarItem) => {
+    if (item.children && item.children.length > 0) {
+      if (isCollapsed) {
+        setIsCollapsed(false);
+      }
+      toggleSubmenu(item.title);
+    }
+  };
+
   const SidebarMenuItem = ({ item, collapsed }: { item: SidebarItem; collapsed: boolean }) => {
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = hasChildren && isMenuExpanded(item.title);
@@ -195,7 +205,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       return (
         <div className="mb-2">
           <button
-            onClick={() => !collapsed && toggleSubmenu(item.title)}
+            onClick={() => handleMenuClick(item)}
             className={cn(
               'flex items-center w-full rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               collapsed ? 'justify-center' : 'justify-between',
@@ -206,15 +216,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             title={collapsed ? item.title : undefined}
           >
             <div className={cn('flex items-center', collapsed ? 'justify-center' : 'space-x-3')}>
-              <item.icon className="h-5 w-5" />
+              <item.icon className="h-5 w-5 flex-shrink-0" />
               {!collapsed && <span>{item.title}</span>}
             </div>
             {!collapsed && hasChildren && (
-              <ChevronDown className={cn('h-4 w-4 transition-transform', isExpanded && 'rotate-180')} />
+              <ChevronDown className={cn('h-4 w-4 transition-transform flex-shrink-0', isExpanded && 'rotate-180')} />
             )}
           </button>
 
-          {/* Submenu items */}
           {!collapsed && hasChildren && isExpanded && (
             <div className="ml-6 mt-1 space-y-1">
               {item.children!.map((child) => (
@@ -229,7 +238,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   )}
                   onClick={() => setIsSidebarOpen(false)}
                 >
-                  <child.icon className="h-4 w-4" />
+                  <child.icon className="h-4 w-4 flex-shrink-0" />
                   <span>{child.title}</span>
                 </Link>
               ))}
@@ -253,7 +262,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           onClick={() => setIsSidebarOpen(false)}
           title={collapsed ? item.title : undefined}
         >
-          <item.icon className="h-5 w-5" />
+          <item.icon className="h-5 w-5 flex-shrink-0" />
           {!collapsed && <span>{item.title}</span>}
         </Link>
       </div>
@@ -265,7 +274,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Fixed Header - Logo and Collapse Toggle */}
       <div className={cn("flex h-16 items-center flex-shrink-0 border-b border-sidebar-border", collapsed ? "px-3 justify-center" : "px-6 justify-between")}>
         <Link to="/admin" className={cn("flex items-center", collapsed ? "justify-center" : "space-x-2")}>
-          <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center flex-shrink-0">
             <span className="text-sidebar-primary-foreground font-bold text-sm">A</span>
           </div>
           {!collapsed && <span className="text-xl font-bold text-sidebar-foreground">Admin Panel</span>}
@@ -274,7 +283,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="hidden md:flex h-8 w-8 p-0"
+            className="hidden md:flex h-8 w-8 p-0 flex-shrink-0"
             onClick={() => setIsCollapsed(true)}
             title="Collapse sidebar"
           >
@@ -298,21 +307,24 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         </div>
       )}
 
-      {/* Scrollable Navigation */}
+      {/* Main Navigation Area - Optimized height calculation */}
       <div className="flex-1 overflow-hidden">
-        <ScrollArea className="h-full px-3 py-4">
-          <nav className="space-y-1">
-            {sidebarItems.map((item) => (
-              <SidebarMenuItem key={item.title} item={item} collapsed={collapsed} />
-            ))}
-          </nav>
+        <ScrollArea className={cn("h-full", !collapsed && "h-[75vh] w-[260px]")}>
+          <div className={cn("p-4 pb-2", collapsed && "px-2")}>
+            <nav className="space-y-1">
+              {sidebarItems.map((item) => (
+                <SidebarMenuItem key={item.title} item={item} collapsed={collapsed} />
+              ))}
+            </nav>
+          </div>
+          <ScrollBar orientation="vertical" />
         </ScrollArea>
       </div>
 
-      {/* Fixed Footer - Theme Toggle, Notifications, Profile */}
-      <div className={cn("border-t border-sidebar-border p-3 flex-shrink-0", collapsed ? "space-y-3" : "space-y-2")}>
+      {/* Fixed Footer - Positioned higher with better spacing */}
+      <div className={cn("border-t border-sidebar-border p-4 pt-3 flex-shrink-0 mt-auto", collapsed ? "space-y-3" : "space-y-3")}>
         {/* Theme Toggle and Notifications */}
-        <div className={cn("flex", collapsed ? "flex-col items-center space-y-2" : "items-center gap-2")}>
+        <div className={cn("flex", collapsed ? "flex-col items-center space-y-2" : "items-center justify-between")}>
           {/* Theme Toggle */}
           <div className={cn("flex", collapsed ? "justify-center" : "justify-start")}>
             <ThemeToggle />
@@ -334,17 +346,17 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className={cn("p-2 hover:bg-transparent", collapsed ? "flex items-center justify-center" : "flex items-center space-x-2 w-full")}>
-                <Avatar className="h-6 w-6">
+                <Avatar className="h-6 w-6 flex-shrink-0">
                   <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 {!collapsed && (
                   <>
-                    <div className="flex flex-col items-start flex-1">
-                      <span className="text-sm font-medium text-foreground">John Doe</span>
-                      <span className="text-xs text-muted-foreground">Admin</span>
+                    <div className="flex flex-col items-start flex-1 min-w-0">
+                      <span className="text-sm font-medium text-foreground truncate">John Doe</span>
+                      <span className="text-xs text-muted-foreground truncate">Admin</span>
                     </div>
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4 flex-shrink-0" />
                   </>
                 )}
               </Button>
@@ -393,7 +405,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Desktop Sidebar */}
       <div className={cn(
         "hidden md:fixed md:inset-y-0 md:z-50 md:flex md:flex-col transition-all duration-300",
-        isCollapsed ? "md:w-16" : "md:w-64"
+        isCollapsed ? "md:w-20" : "md:w-64" 
       )}>
         <div className="flex grow flex-col gap-y-0 border-r border-sidebar-border bg-sidebar">
           <SidebarContent collapsed={isCollapsed} />
@@ -410,11 +422,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Main Content */}
       <div className={cn(
         "min-h-screen flex flex-col transition-all duration-300",
-        isCollapsed ? "md:pl-16" : "md:pl-64"
+        isCollapsed ? "md:pl-20" : "md:pl-64" 
       )}>
         {/* Mobile Header Only */}
         <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b border-border bg-background px-4 shadow-sm md:hidden">
-          {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="sm"
@@ -423,7 +434,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <Menu className="h-6 w-6" />
           </Button>
 
-          {/* Mobile header actions */}
           <div className="flex items-center gap-x-2">
             <ThemeToggle />
             <Button variant="ghost" size="sm" className="relative">
