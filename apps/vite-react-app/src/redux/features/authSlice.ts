@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { API_BASE_URL_SSO, API_BASE_URL_COMPANY_PROFILE } from '@/config';
+import { API_BASE_URL } from '@/config';
 import { jwtDecode } from 'jwt-decode';
 
 // Types for the target application user structure
@@ -111,7 +111,7 @@ export const fetchCurrentUser = createAsyncThunk(
       }
 
       // 1. Fetch basic user data
-      const userResponse = await axios.get<UserData>(`${API_BASE_URL_COMPANY_PROFILE}/users/me/roles`, {
+      const userResponse = await axios.get<UserData>(`${API_BASE_URL}/users/me/roles`, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
@@ -141,7 +141,7 @@ export const verifyToken = createAsyncThunk(
       }
 
       // Verify token with SSO service
-      const response = await axios.post(`${API_BASE_URL_SSO}/auth/verify`, {}, {
+      const response = await axios.post(`${API_BASE_URL}/auth/verify`, {}, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
@@ -166,7 +166,7 @@ export const refreshToken = createAsyncThunk(
       }
 
       // Use SSO service for token refresh
-      const response = await axios.post(`${API_BASE_URL_SSO}/auth/refresh`, {}, {
+      const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {}, {
         headers: {
           Authorization: `Bearer ${auth.refreshToken}`
         }
@@ -190,7 +190,7 @@ export const logoutUser = createAsyncThunk(
       if (auth.accessToken) {
         // Notify SSO service about logout
         try {
-          await axios.post(`${API_BASE_URL_SSO}/auth/logout`, {}, {
+          await axios.post(`${API_BASE_URL}/auth/logout`, {}, {
             headers: {
               Authorization: `Bearer ${auth.accessToken}`
             }

@@ -1,15 +1,13 @@
 // src/App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-
+import { TooltipProvider } from '@workspace/ui/components/tooltip';
 // Import your layouts/components
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
-// import AuthProvider from './components/auth/AuthProvider';
 import { Toaster } from "@workspace/ui/components/sonner";
-// import AuthGuard from './components/auth/AuthGuard';
-// import AdminLayout from './layouts/AdminLayout';
+import { AuthProvider } from './components/Auth/AuthProvider';
 
 function App() {
   return (
@@ -22,7 +20,10 @@ function App() {
                 <Toaster />
                 <Routes>
                   {/* <Route path="*" element={<NotFoundPage />} /> */}
-                 </Routes>
+                  <Route
+                    path='/'
+                  ></Route>
+                </Routes>
               </AuthProvider>
             </BrowserRouter>
           </PersistGate>
